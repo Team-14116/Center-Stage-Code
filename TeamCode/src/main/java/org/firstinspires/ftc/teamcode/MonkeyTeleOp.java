@@ -67,8 +67,8 @@ public class MonkeyTeleOp extends OpMode{
 
 
         double y = gamepad1.left_stick_y * 0.6; // Remember, this is reversed!
-        double x = -gamepad1.left_stick_x * 0;
-        double rx = -gamepad1.right_stick_x * 0.6;
+        double x = gamepad1.left_stick_x * 0;
+        double rx = gamepad1.right_stick_x * 0.6;
 
         // Denominator is the largest motor power (absolute value) or 1
         // This ensures all the powers maintain the same ratio, but only when
@@ -84,14 +84,14 @@ public class MonkeyTeleOp extends OpMode{
         robot.rightFront.setPower(frontRightPower);
         robot.rightRear.setPower(backRightPower);
 
-        if(gamepad1.dpad_left) {
+        if(gamepad1.dpad_right) {
             robot.leftFront.setPower(0.5);
             robot.leftRear.setPower(-0.5);
             robot.rightFront.setPower(-0.5);
             robot.rightRear.setPower(0.5);
         }
 
-        if(gamepad1.dpad_right) {
+        if(gamepad1.dpad_left) {
             robot.leftFront.setPower(-0.5);
             robot.leftRear.setPower(0.5);
             robot.rightFront.setPower(0.5);
