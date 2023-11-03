@@ -51,13 +51,13 @@ import java.util.List;
 public final class MecanumDrive {
     public static class Params {
         // drive model parameters
-        public double inPerTick = 0;
-        public double lateralInPerTick = 1;
-        public double trackWidthTicks = 0;
+        public double inPerTick = 1;  //(124/5508);
+        public double lateralInPerTick = 1;// (126/-4974.25);
+        public double trackWidthTicks = 1; //1190.183713290995;
 
         // feedforward parameters (in tick units)
-        public double kS = 0;
-        public double kV = 0;
+        public double kS = 0.8191517931086416;
+        public double kV = 0.004415640655487226;
         public double kA = 0;
 
         // path profile parameters (in inches)
@@ -116,6 +116,9 @@ public final class MecanumDrive {
             leftBack = new OverflowEncoder(new RawEncoder(MecanumDrive.this.leftBack));
             rightBack = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightBack));
             rightFront = new OverflowEncoder(new RawEncoder(MecanumDrive.this.rightFront));
+
+            leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
+            leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
             lastLeftFrontPos = leftFront.getPositionAndVelocity().position;
             lastLeftBackPos = leftBack.getPositionAndVelocity().position;
@@ -182,17 +185,11 @@ public final class MecanumDrive {
         rightBack = hardwareMap.get(DcMotorEx.class, "rightRear");
         rightFront = hardwareMap.get(DcMotorEx.class, "rightFront");
 
-        Encoder leftFrontEncoder = hardwareMap.get(Encoder.class, "leftFront");
-        Encoder leftBackEncoder = hardwareMap.get(Encoder.class, "leftRear");
-
 
         leftFront.setDirection(DcMotor.Direction.REVERSE);
         leftBack.setDirection(DcMotor.Direction.REVERSE);
         rightBack.setDirection(DcMotor.Direction.REVERSE);
         rightFront.setDirection(DcMotor.Direction.FORWARD);
-
-        leftFrontEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
-        leftBackEncoder.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
 
