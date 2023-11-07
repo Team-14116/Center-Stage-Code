@@ -51,14 +51,14 @@ import java.util.List;
 public final class MecanumDrive {
     public static class Params {
         // drive model parameters
-        public double inPerTick = 1;  //(124/5508);
-        public double lateralInPerTick = 1;// (126/-4974.25);
-        public double trackWidthTicks = 1; //1190.183713290995;
+        public double inPerTick = (124.0/5508.0);
+        public double lateralInPerTick = (126.0/4974.25);
+        public double trackWidthTicks = 1187.6426675459256;
 
         // feedforward parameters (in tick units)
-        public double kS = 0.8191517931086416;
-        public double kV = 0.004415640655487226;
-        public double kA = 0;
+        public double kS = 1.0350247585401249;
+        public double kV = 0.004347653203878338;
+        public double kA = 0.0015;
 
         // path profile parameters (in inches)
         public double maxWheelVel = 50;
@@ -70,13 +70,13 @@ public final class MecanumDrive {
         public double maxAngAccel = Math.PI;
 
         // path controller gains
-        public double axialGain = 0.0;
-        public double lateralGain = 0.0;
-        public double headingGain = 0.0; // shared with turn
+        public double axialGain = 5;
+        public double lateralGain = 10;
+        public double headingGain = 4; // shared with turn
 
-        public double axialVelGain = 0.0;
-        public double lateralVelGain = 0.0;
-        public double headingVelGain = 0.0; // shared with turn
+        public double axialVelGain = 0.1;
+        public double lateralVelGain = 2;
+        public double headingVelGain = 0.75; // shared with turn
     }
 
     public static Params PARAMS = new Params();
@@ -120,8 +120,8 @@ public final class MecanumDrive {
             leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
             leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
 
-            lastLeftFrontPos = leftFront.getPositionAndVelocity().position;
-            lastLeftBackPos = leftBack.getPositionAndVelocity().position;
+            lastLeftFrontPos = -leftFront.getPositionAndVelocity().position;
+            lastLeftBackPos = -leftBack.getPositionAndVelocity().position;
             lastRightBackPos = rightBack.getPositionAndVelocity().position;
             lastRightFrontPos = rightFront.getPositionAndVelocity().position;
 
