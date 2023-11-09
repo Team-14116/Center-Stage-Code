@@ -15,7 +15,6 @@ public class BaseRobot {
     public DcMotor arm = null;
     public Servo   grip = null;
     public Servo   pivot = null;
-    public Servo   auto = null;
     public Servo   launch = null;
 
 
@@ -51,14 +50,13 @@ public class BaseRobot {
 
         grip    = hwMap.servo.get("grip");
         pivot    = hwMap.servo.get("pivot");
-        auto    = hwMap.servo.get("auto");
         launch    = hwMap.servo.get("launch");
 
-
-        leftFront.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
         rightFront.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
-        leftRear.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        rightRear.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
+        leftFront.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
+        leftRear.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors
+        rightRear.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+
         pullUp.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         arm.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
@@ -94,7 +92,6 @@ public class BaseRobot {
      * @param periodMs  Length of wait cycle in mSec.
      */
     public void waitForTick(long periodMs) {
-
         long  remaining = periodMs - (long)period.milliseconds();
 
         // sleep for the remaining portion of the regular cycle period.

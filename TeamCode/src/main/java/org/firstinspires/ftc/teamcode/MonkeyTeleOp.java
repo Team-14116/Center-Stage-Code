@@ -35,9 +35,8 @@ public class MonkeyTeleOp extends OpMode{
         robot.pullUp.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        robot.grip.setPosition(0);
-        robot.pivot.setPosition(0);
-        robot.auto.setPosition(0);
+        robot.grip.setPosition(0.2);
+        robot.pivot.setPosition(0.55);
         robot.launch.setPosition(1);
 
 
@@ -66,7 +65,7 @@ public class MonkeyTeleOp extends OpMode{
     public void loop() {
 
 
-        double y = gamepad1.left_stick_y * 0.6; // Remember, this is reversed!
+        double y = -gamepad1.left_stick_y * 0.6; // Remember, this is reversed!
         double x = gamepad1.left_stick_x * 0;
         double rx = gamepad1.right_stick_x * 0.6;
 
@@ -80,8 +79,8 @@ public class MonkeyTeleOp extends OpMode{
         double backRightPower = (y + x - rx) / denominator;
 
         robot.leftFront.setPower(frontLeftPower);
-        robot.leftRear.setPower(backLeftPower);
         robot.rightFront.setPower(frontRightPower);
+        robot.leftRear.setPower(backLeftPower);
         robot.rightRear.setPower(backRightPower);
 
         if(gamepad1.dpad_right) {
@@ -101,25 +100,25 @@ public class MonkeyTeleOp extends OpMode{
         // main arm
         if(gamepad1.y) {
            robot.arm.setPower(1);
-            robot.pivot.setPosition(0.3);
+            robot.pivot.setPosition(0.9);
         } else if (gamepad1.a) {
             robot.arm.setPower(-1);
-            robot.pivot.setPosition(0.5);
+            robot.pivot.setPosition(0.55);
         } else {
             robot.arm.setPower(0.01);
         }
 
         // claw mechanism
         if(gamepad1.left_bumper){
-            robot.grip.setPosition(0);
+            robot.grip.setPosition(0.2);
         } else if(gamepad1.right_bumper) {
             robot.grip.setPosition(1);
         }
 
         if(gamepad1.b) {
-            robot.pivot.setPosition(0.5);
+            robot.pivot.setPosition(0.55);
         } else if(gamepad1.x) {
-            robot.pivot.setPosition(0.25);
+            robot.pivot.setPosition(0.9);
         }
 
         if(gamepad1.dpad_up) {

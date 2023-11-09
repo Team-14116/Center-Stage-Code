@@ -31,7 +31,7 @@ public class OpenCVTest extends OpMode{
         webcam1.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
             public void onOpened() {
-                webcam1.startStreaming(1280, 720, OpenCvCameraRotation.SIDEWAYS_LEFT);
+                webcam1.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
             }
 
             @Override
@@ -60,11 +60,11 @@ public class OpenCVTest extends OpMode{
 
         public Mat processFrame(Mat input) {
             Imgproc.cvtColor(input, YCbCr, Imgproc.COLOR_RGB2YCrCb);
-            telemetry.addLine("pipeline running");
+            //telemetry.addLine("pipeline running");
 
-            Rect leftRect = new Rect(1, 1, 239, 1279);
-            Rect midRect = new Rect(240, 1, 239, 1279);
-            Rect rightRect = new Rect(480, 1, 239, 1279);
+            Rect leftRect = new Rect(1, 1, 425, 719);
+            Rect midRect = new Rect(426, 1, 425, 719);
+            Rect rightRect = new Rect(852, 1, 425, 719);
 
             input.copyTo(outPut);
             Imgproc.rectangle(outPut, leftRect, color, 2);
