@@ -23,8 +23,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Autonomous(name="Blue Auto")
-public class BlueAuto extends LinearOpMode {
+@Autonomous(name="Red Auto")
+public class RedAuto extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private ElapsedTime period = new ElapsedTime();
@@ -58,71 +58,71 @@ public class BlueAuto extends LinearOpMode {
 
 
         Action move1 = drive.actionBuilder(startPose)
-                .strafeTo(new Vector2d(20,5))
+                .strafeTo(new Vector2d(20,-5))
                 .lineToX(30)
                 .waitSeconds(0.5)
                 .build();
 
-            Action move1a = drive.actionBuilder(new Pose2d(30, 5, 0))
-                    .strafeTo(new Vector2d(23, 14))
+            Action move1a = drive.actionBuilder(new Pose2d(30, -5, 0))
+                    .strafeTo(new Vector2d(23, -14))
                     .build();
 
 
-            Action move1b = drive.actionBuilder(new Pose2d(23, 14, 0))
-                    .strafeTo(new Vector2d(15, 15))
-                    .strafeTo(new Vector2d(27, 18))
+            Action move1b = drive.actionBuilder(new Pose2d(23, -14, 0))
+                    .strafeTo(new Vector2d(15, -15))
+                    .strafeTo(new Vector2d(27, -18))
                     .build();
 
-            Action move1c = drive.actionBuilder(new Pose2d(27, 18, 0))
+            Action move1c = drive.actionBuilder(new Pose2d(27, -18, 0))
                     .lineToX(15)
-                    .strafeTo(new Vector2d(20, 40))
-                    .turn(Math.toRadians(90))
+                    .strafeTo(new Vector2d(20, -40))
+                    .turn(Math.toRadians(-90))
                     .build();
 
-            Action move1d = drive.actionBuilder(new Pose2d(20, 40, Math.toRadians(90)))
+            Action move1d = drive.actionBuilder(new Pose2d(20, -40, Math.toRadians(-90)))
                     .lineToY(50)
                     .build();
 
-            Action move1e = drive.actionBuilder(new Pose2d(20, 50, Math.toRadians(90)))
-                    .strafeTo(new Vector2d(5, 49))
+            Action move1e = drive.actionBuilder(new Pose2d(20, -50, Math.toRadians(-90)))
+                    .strafeTo(new Vector2d(5, -49))
                     .build();
 
-        Action move2 = drive.actionBuilder(new Pose2d(30, 5, 0))
-                .strafeTo(new Vector2d(25, 1))
+        Action move2 = drive.actionBuilder(new Pose2d(30, -5, 0))
+                .strafeTo(new Vector2d(25, -1))
                 .build();
 
-        Action move22 = drive.actionBuilder(new Pose2d(25, 1, 0))
+        Action move22 = drive.actionBuilder(new Pose2d(25, -1, 0))
                 .lineToX(33)
                 .build();
 
-            Action move2a = drive.actionBuilder(new Pose2d(33, 1, 0))
-                    .strafeTo(new Vector2d(25, 2))
-                    .strafeTo(new Vector2d(36, 7))
+            Action move2a = drive.actionBuilder(new Pose2d(33, -1, 0))
+                    .strafeTo(new Vector2d(25, -2))
+                    .strafeTo(new Vector2d(36, -7))
                     .build();
 
-            Action move2b = drive.actionBuilder(new Pose2d(36, 7, 0))
+            Action move2b = drive.actionBuilder(new Pose2d(36, -7, 0))
                     .lineToX(20)
-                    .strafeTo(new Vector2d(30, 40))
-                    .turn(Math.toRadians(90))
+                    .strafeTo(new Vector2d(30, -40))
+                    .turn(Math.toRadians(-90))
                     .build();
 
-            Action move2c = drive.actionBuilder(new Pose2d(30, 40, Math.toRadians(90)))
-                    .lineToY(50)
+            Action move2c = drive.actionBuilder(new Pose2d(30, -40, Math.toRadians(-90)))
+                    .lineToY(-50)
                     .build();
 
-            Action move2d = drive.actionBuilder(new Pose2d(25, 50, Math.toRadians(90)))
-                    .strafeTo(new Vector2d(5, 49))
+            Action move2d = drive.actionBuilder(new Pose2d(25, -50, Math.toRadians(-90)))
+                    .strafeTo(new Vector2d(5, -49))
                     .build();
 
 
-        Action move3 = drive.actionBuilder(new Pose2d(33, 1, 0))
+        Action move3 = drive.actionBuilder(new Pose2d(33, -1, 0))
                 .lineToX(26)
-                .strafeTo(new Vector2d(29, -20))
+                .strafeTo(new Vector2d(29, 20))
                 .build();
 
-        Action move33 = drive.actionBuilder(new Pose2d(29, -20, 0))
+        Action move33 = drive.actionBuilder(new Pose2d(29, 20, 0))
                 .lineToX(25)
-                .strafeTo((new Vector2d(5, 50)))
+                .strafeTo((new Vector2d(5, -50)))
                 .build();
 
 
@@ -145,7 +145,7 @@ public class BlueAuto extends LinearOpMode {
 
         Actions.runBlocking(move1);
 
-        if(leftSensor.blue() > leftSensor.green() && leftSensor.blue() > leftSensor.red()) {
+        if(rightSensor.red() > rightSensor.green() && rightSensor.red() > rightSensor.blue()) {
             Actions.runBlocking(move1a);
             grip.setPosition((0.2));
             Actions.runBlocking(move1b);
@@ -170,7 +170,7 @@ public class BlueAuto extends LinearOpMode {
         } else {
             Actions.runBlocking(move2);
             Actions.runBlocking(move22);
-            if(rightSensor.blue() > rightSensor.green() && rightSensor.blue() > rightSensor.red()) {
+            if(leftSensor.red() > leftSensor.green() && leftSensor.red() > leftSensor.blue()) {
                 grip.setPosition(0);
                 Actions.runBlocking(move2a);
                 delay(0.5);

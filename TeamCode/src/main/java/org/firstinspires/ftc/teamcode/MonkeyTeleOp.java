@@ -35,7 +35,7 @@ public class MonkeyTeleOp extends OpMode{
         robot.pullUp.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        robot.grip.setPosition(0.2);
+        robot.grip.setPosition(0.4);
         robot.pivot.setPosition(0.575);
         robot.launch.setPosition(1);
 
@@ -110,7 +110,7 @@ public class MonkeyTeleOp extends OpMode{
 
         // claw mechanism
         if(gamepad1.left_bumper){
-            robot.grip.setPosition(0.2);
+            robot.grip.setPosition(0.4);
         } else if(gamepad1.right_bumper) {
             robot.grip.setPosition(1);
         }
