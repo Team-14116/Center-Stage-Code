@@ -54,7 +54,7 @@ public class BlueAuto extends LinearOpMode {
         rightSensor = hardwareMap.colorSensor.get("rightColor");
 
         grip.setPosition(1);
-        pivot.setPosition(0.58);
+        pivot.setPosition(0.625);
 
 
         Action move1 = drive.actionBuilder(startPose)
@@ -116,13 +116,25 @@ public class BlueAuto extends LinearOpMode {
 
 
         Action move3 = drive.actionBuilder(new Pose2d(33, 1, 0))
-                .lineToX(26)
-                .strafeTo(new Vector2d(29, -20))
+                .lineToX(28)
+                .turn(Math.toRadians(-90))
+                .lineToY(-13)
+                .lineToY(-8)
                 .build();
 
-        Action move33 = drive.actionBuilder(new Pose2d(29, -20, 0))
-                .lineToX(25)
-                .strafeTo((new Vector2d(5, 50)))
+        Action move3a = drive.actionBuilder(new Pose2d(28, -8, Math.toRadians(-90)))
+                .strafeTo(new Vector2d(29, -2))
+                .strafeTo(new Vector2d(32, -11))
+                .build();
+
+        Action move3b = drive.actionBuilder(new Pose2d(32, -11, Math.toRadians(-90)))
+                .lineToY(10)
+                .strafeTo(new Vector2d(35, 30))
+                .turn(Math.toRadians(180))
+                .build();
+
+        Action move3c = drive.actionBuilder(new Pose2d(35, -30, Math.toRadians(90)))
+                .lineToY(50)
                 .build();
 
 
@@ -197,7 +209,24 @@ public class BlueAuto extends LinearOpMode {
                 delay(0.25);
                 grip.setPosition(0.2);
                 delay(0.25);
-                Actions.runBlocking(move33);
+                Actions.runBlocking(move3a);
+                delay(0.25);
+                grip.setPosition(1);
+
+                delay(0.5);
+                Actions.runBlocking(move3b);
+
+                arm.setPower(1);
+                delay(0.5);
+                arm.setPower(0.1);
+                pivot.setPosition(0.9);
+
+                Actions.runBlocking(move3c);
+                delay(0.5);
+                grip.setPosition(0.2);
+
+                delay(0.25);
+
 
 
 
