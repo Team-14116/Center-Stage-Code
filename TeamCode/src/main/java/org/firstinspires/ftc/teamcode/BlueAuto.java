@@ -92,21 +92,22 @@ public class BlueAuto extends LinearOpMode {
                 .build();
 
         Action move22 = drive.actionBuilder(new Pose2d(25, 1, 0))
-                .lineToX(33)
+                .lineToX(34)
+                .lineToX(30)
                 .build();
 
-            Action move2a = drive.actionBuilder(new Pose2d(33, 1, 0))
-                    .strafeTo(new Vector2d(25, 2))
-                    .strafeTo(new Vector2d(36, 7))
+            Action move2a = drive.actionBuilder(new Pose2d(30, 1, 0))
+                    .strafeTo(new Vector2d(21, 2))
+                    .strafeTo(new Vector2d(33, 7))
                     .build();
 
             Action move2b = drive.actionBuilder(new Pose2d(36, 7, 0))
                     .lineToX(20)
-                    .strafeTo(new Vector2d(30, 40))
+                    .strafeTo(new Vector2d(25, 40))
                     .turn(Math.toRadians(90))
                     .build();
 
-            Action move2c = drive.actionBuilder(new Pose2d(30, 40, Math.toRadians(90)))
+            Action move2c = drive.actionBuilder(new Pose2d(25, 40, Math.toRadians(90)))
                     .lineToY(50)
                     .build();
 
@@ -116,25 +117,25 @@ public class BlueAuto extends LinearOpMode {
 
 
         Action move3 = drive.actionBuilder(new Pose2d(33, 1, 0))
-                .lineToX(28)
+                .lineToX(30)
                 .turn(Math.toRadians(-90))
                 .lineToY(-13)
-                .lineToY(-8)
+                .lineToY(-7)
                 .build();
 
-        Action move3a = drive.actionBuilder(new Pose2d(28, -8, Math.toRadians(-90)))
-                .strafeTo(new Vector2d(29, -2))
-                .strafeTo(new Vector2d(32, -11))
+        Action move3a = drive.actionBuilder(new Pose2d(30, -7, Math.toRadians(-90)))
+                .strafeTo(new Vector2d(31, -1))
+                .strafeTo(new Vector2d(34, -12))
                 .build();
 
-        Action move3b = drive.actionBuilder(new Pose2d(32, -11, Math.toRadians(-90)))
+        Action move3b = drive.actionBuilder(new Pose2d(34, -12, Math.toRadians(-90)))
                 .lineToY(10)
                 .strafeTo(new Vector2d(35, 30))
                 .turn(Math.toRadians(180))
                 .build();
 
-        Action move3c = drive.actionBuilder(new Pose2d(35, -30, Math.toRadians(90)))
-                .lineToY(50)
+        Action move3c = drive.actionBuilder(new Pose2d(35, 30, Math.toRadians(90)))
+                .lineToY(46)
                 .build();
 
 
@@ -200,7 +201,7 @@ public class BlueAuto extends LinearOpMode {
                 grip.setPosition(0.2);
 
                 delay(0.5);
-                Actions.runBlocking(move2d);
+                //Actions.runBlocking(move2d);
 
 
             } else {
