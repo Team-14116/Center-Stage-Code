@@ -33,7 +33,7 @@ public class MonkeyTeleOp extends OpMode{
         robot.leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.pullUp.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        robot.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+      //  robot.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         robot.grip.setPosition(0.4);
         robot.pivot.setPosition(0.625);
@@ -63,7 +63,7 @@ public class MonkeyTeleOp extends OpMode{
      */
     @Override
     public void loop() {
-
+        int armPos = robot.arm.getCurrentPosition();
 
         double y = -gamepad1.left_stick_y * 0.6; // Remember, this is reversed!
         double x = gamepad1.left_stick_x * 0;
@@ -98,11 +98,17 @@ public class MonkeyTeleOp extends OpMode{
         }
 
         // main arm
-        if(gamepad1.y) {
-           robot.arm.setPower(1);
+        if(gamepad1.y && armPos < -1500) {
+            robot.arm.setPower(1);
             robot.pivot.setPosition(0.9);
-        } else if (gamepad1.a) {
+        } else if(gamepad1.y && armPos > -1500) {
+            robot.arm.setPower(0.3);
+            robot.pivot.setPosition(0.9);
+        } else if (gamepad1.a && armPos < -1500) {
             robot.arm.setPower(-1);
+            robot.pivot.setPosition(0.625);
+        } else if(gamepad1.a && armPos > -1500) {
+            robot.arm.setPower(-0.3);
             robot.pivot.setPosition(0.625);
         } else {
             robot.arm.setPower(0.01);
@@ -133,7 +139,7 @@ public class MonkeyTeleOp extends OpMode{
         // pull up arm
         robot.pullUp.setPower(gamepad1.right_trigger);
         robot.pullUp.setPower(-gamepad1.left_trigger);
-
+        telemetry.addData("arm pos", robot.arm.getCurrentPosition());
     }
 
     /*
