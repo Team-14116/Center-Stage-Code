@@ -14,6 +14,7 @@ public class BaseRobot {
     public DcMotor pullUp = null;
     public DcMotor arm = null;
     public Servo   grip = null;
+    public Servo   grip2 = null;
     public Servo   pivot = null;
     public Servo   launch = null;
 
@@ -49,8 +50,10 @@ public class BaseRobot {
         arm    = hwMap.dcMotor.get("arm");
 
         grip    = hwMap.servo.get("grip");
+        grip2   = hwMap.servo.get("grip2");
         pivot    = hwMap.servo.get("pivot");
         launch    = hwMap.servo.get("launch");
+
 
         rightFront.setDirection(DcMotor.Direction.FORWARD);// Set to FORWARD if using AndyMark motors
         leftFront.setDirection(DcMotor.Direction.REVERSE); // Set to REVERSE if using AndyMark motors

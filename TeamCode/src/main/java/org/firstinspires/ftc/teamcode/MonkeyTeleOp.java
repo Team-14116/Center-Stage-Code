@@ -36,7 +36,8 @@ public class MonkeyTeleOp extends OpMode{
       //  robot.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         robot.grip.setPosition(0.4);
-        robot.pivot.setPosition(0.625);
+        robot.grip2.setPosition(0.2);
+        robot.pivot.setPosition(0.475);
         robot.launch.setPosition(0);
 
 
@@ -101,12 +102,12 @@ public class MonkeyTeleOp extends OpMode{
         if(gamepad1.y) {
             robot.arm.setPower(1);
             robot.pivot.setPosition(0.9);
-        } else if (gamepad1.a && armPos > -1500) {
+        } else if (gamepad1.a && armPos > 500) {
             robot.arm.setPower(-1);
-            robot.pivot.setPosition(0.625);
-        } else if(gamepad1.a && armPos < -1500) {
+            robot.pivot.setPosition(0.5);
+        } else if(gamepad1.a && armPos < 500) {
             robot.arm.setPower(-0.3);
-            robot.pivot.setPosition(0.625);
+            robot.pivot.setPosition(0.5);
         } else {
             robot.arm.setPower(0.01);
         }
@@ -114,12 +115,14 @@ public class MonkeyTeleOp extends OpMode{
         // claw mechanism
         if(gamepad1.left_bumper){
             robot.grip.setPosition(0.4);
+            robot.grip2.setPosition(0.2);
         } else if(gamepad1.right_bumper) {
             robot.grip.setPosition(1);
+            robot.grip2.setPosition(0.8);
         }
 
         if(gamepad1.b) {
-            robot.pivot.setPosition(0.625);
+            robot.pivot.setPosition(0.475);
         } else if(gamepad1.x) {
             robot.pivot.setPosition(0.9);
         }
