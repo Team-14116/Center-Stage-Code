@@ -34,9 +34,10 @@ public class BlueAuto extends LinearOpMode {
 
     public DcMotor arm = null;
     public Servo   grip = null;
+    public Servo   grip2 = null;
     public Servo   pivot = null;
     MecanumDrive drive = null;
-    
+
     @Override
     public void runOpMode() throws InterruptedException {
 
@@ -48,13 +49,15 @@ public class BlueAuto extends LinearOpMode {
         arm.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
         grip    = hardwareMap.servo.get("grip");
+        grip2    = hardwareMap.servo.get("grip2");
         pivot    = hardwareMap.servo.get("pivot");
 
         leftSensor = hardwareMap.colorSensor.get("leftColor");
         rightSensor = hardwareMap.colorSensor.get("rightColor");
 
-        grip.setPosition(1);
-        pivot.setPosition(0.625);
+        grip.setPosition(0);
+        grip2.setPosition(0);
+        pivot.setPosition(0.525);
 
 
         Action move1 = drive.actionBuilder(startPose)
@@ -63,29 +66,27 @@ public class BlueAuto extends LinearOpMode {
                 .waitSeconds(0.5)
                 .build();
 
-            Action move1a = drive.actionBuilder(new Pose2d(30, 5, 0))
-                    .strafeTo(new Vector2d(23, 14))
-                    .build();
+        Action move1a = drive.actionBuilder(new Pose2d(30, 5, 0))
+                .strafeTo(new Vector2d(23, 14))
+                .build();
 
 
-            Action move1b = drive.actionBuilder(new Pose2d(23, 14, 0))
-                    .strafeTo(new Vector2d(15, 15))
-                    .strafeTo(new Vector2d(27, 18))
-                    .build();
+        Action move1b = drive.actionBuilder(new Pose2d(23, 14, 0))
+                .strafeTo(new Vector2d(15, 15))
+                .build();
 
-            Action move1c = drive.actionBuilder(new Pose2d(27, 18, 0))
-                    .lineToX(15)
-                    .strafeTo(new Vector2d(20, 40))
-                    .turn(Math.toRadians(90))
-                    .build();
+        Action move1c = drive.actionBuilder(new Pose2d(15, 15, 0))
+                .strafeTo(new Vector2d(20, 40))
+                .turn(Math.toRadians(90))
+                .build();
 
-            Action move1d = drive.actionBuilder(new Pose2d(20, 40, Math.toRadians(90)))
-                    .lineToY(50)
-                    .build();
+        Action move1d = drive.actionBuilder(new Pose2d(20, 40, Math.toRadians(90)))
+                .lineToY(50)
+                .build();
 
-            Action move1e = drive.actionBuilder(new Pose2d(20, 50, Math.toRadians(90)))
-                    .strafeTo(new Vector2d(5, 49))
-                    .build();
+        Action move1e = drive.actionBuilder(new Pose2d(20, 50, Math.toRadians(90)))
+                .strafeTo(new Vector2d(5, 49))
+                .build();
 
         Action move2 = drive.actionBuilder(new Pose2d(30, 5, 0))
                 .strafeTo(new Vector2d(25, 1))
@@ -93,43 +94,43 @@ public class BlueAuto extends LinearOpMode {
 
         Action move22 = drive.actionBuilder(new Pose2d(25, 1, 0))
                 .lineToX(34)
+                .build();
+
+        Action move23 = drive.actionBuilder(new Pose2d(34, 1, 0))
                 .lineToX(30)
                 .build();
 
-            Action move2a = drive.actionBuilder(new Pose2d(30, 1, 0))
-                    .strafeTo(new Vector2d(21, 2))
-                    .strafeTo(new Vector2d(33, 7))
-                    .build();
+        Action move2a = drive.actionBuilder(new Pose2d(30, 1, 0))
+                .strafeTo(new Vector2d(21, 2))
 
-            Action move2b = drive.actionBuilder(new Pose2d(36, 7, 0))
-                    .lineToX(20)
-                    .strafeTo(new Vector2d(25, 40))
-                    .turn(Math.toRadians(90))
-                    .build();
+                .build();
 
-            Action move2c = drive.actionBuilder(new Pose2d(25, 40, Math.toRadians(90)))
-                    .lineToY(50)
-                    .build();
+        Action move2b = drive.actionBuilder(new Pose2d(21, 2, 0))
+                .strafeTo(new Vector2d(25, 40))
+                .turn(Math.toRadians(90))
+                .build();
 
-            Action move2d = drive.actionBuilder(new Pose2d(25, 50, Math.toRadians(90)))
-                    .strafeTo(new Vector2d(5, 49))
-                    .build();
+        Action move2c = drive.actionBuilder(new Pose2d(25, 40, Math.toRadians(90)))
+                .lineToY(50)
+                .build();
+
+        Action move2d = drive.actionBuilder(new Pose2d(25, 50, Math.toRadians(90)))
+                .strafeTo(new Vector2d(5, 49))
+                .build();
 
 
-        Action move3 = drive.actionBuilder(new Pose2d(33, 1, 0))
-                .lineToX(30)
+        Action move3 = drive.actionBuilder(new Pose2d(30, 1, 0))
                 .turn(Math.toRadians(-90))
                 .lineToY(-13)
                 .lineToY(-7)
                 .build();
 
         Action move3a = drive.actionBuilder(new Pose2d(30, -7, Math.toRadians(-90)))
-                .strafeTo(new Vector2d(31, -1))
-                .strafeTo(new Vector2d(34, -12))
+                .lineToY(10)
+
                 .build();
 
-        Action move3b = drive.actionBuilder(new Pose2d(34, -12, Math.toRadians(-90)))
-                .lineToY(10)
+        Action move3b = drive.actionBuilder(new Pose2d(30, 10, Math.toRadians(-90)))
                 .strafeTo(new Vector2d(35, 30))
                 .turn(Math.toRadians(180))
                 .build();
@@ -155,50 +156,60 @@ public class BlueAuto extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-
+        delay(0.1);
+        grip.setPosition(1);
+        grip2.setPosition(1);
+        delay(1);
+        pivot.setPosition(0.9);
         Actions.runBlocking(move1);
 
-        if(leftSensor.blue() > leftSensor.green() && leftSensor.blue() > leftSensor.red()) {
+
+        if(leftSensor.blue() > leftSensor.red() && leftSensor.blue() > rightSensor.green()) {
+            delay(0.25);
             Actions.runBlocking(move1a);
-            grip.setPosition((0.2));
+            pivot.setPosition(0.525);
+            delay(0.25);
+            grip2.setPosition((0.45));
             Actions.runBlocking(move1b);
-            delay(0.5);
-            grip.setPosition(1);
+
             delay(0.5);
             Actions.runBlocking(move1c);
 
             arm.setPower(1);
-            delay(0.5);
+            delay(0.25);
             arm.setPower(0.1);
             pivot.setPosition(0.9);
 
             Actions.runBlocking(move1d);
 
             delay(0.5);
-            grip.setPosition(0.2);
+            grip.setPosition(0.55);
             delay(0.5);
 
-            Actions.runBlocking(move1e);
+            // Actions.runBlocking(move1e);
 
         } else {
             Actions.runBlocking(move2);
             Actions.runBlocking(move22);
+
             if(rightSensor.blue() > rightSensor.green() && rightSensor.blue() > rightSensor.red()) {
-                grip.setPosition(0);
+                delay(0.25);
+                pivot.setPosition(0.525);
+                delay(0.25);
+                grip2.setPosition(0.45);
                 Actions.runBlocking(move2a);
                 delay(0.5);
-                grip.setPosition(1);
-                delay(0.5);
+
                 Actions.runBlocking(move2b);
 
                 arm.setPower(1);
-                delay(0.5);
+                delay(0.25);
                 arm.setPower(0.1);
                 pivot.setPosition(0.9);
 
                 Actions.runBlocking(move2c);
                 delay(0.5);
-                grip.setPosition(0.2);
+                grip.setPosition(0.55);
 
                 delay(0.5);
                 //Actions.runBlocking(move2d);
@@ -208,23 +219,24 @@ public class BlueAuto extends LinearOpMode {
 
                 Actions.runBlocking(move3);
                 delay(0.25);
-                grip.setPosition(0.2);
+                pivot.setPosition(0.525);
+                delay(0.25);
+                grip2.setPosition(0.45);
                 delay(0.25);
                 Actions.runBlocking(move3a);
-                delay(0.25);
-                grip.setPosition(1);
+
 
                 delay(0.5);
                 Actions.runBlocking(move3b);
 
                 arm.setPower(1);
-                delay(0.5);
+                delay(0.25);
                 arm.setPower(0.1);
                 pivot.setPosition(0.9);
 
                 Actions.runBlocking(move3c);
                 delay(0.5);
-                grip.setPosition(0.2);
+                grip.setPosition(0.55);
 
                 delay(0.25);
 
