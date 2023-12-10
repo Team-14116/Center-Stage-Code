@@ -23,8 +23,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Autonomous(name="Blue Auto")
-public class BlueAuto extends LinearOpMode {
+@Autonomous(name="Red Auto Left")
+public class RedAuto2 extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private ElapsedTime period = new ElapsedTime();
@@ -76,15 +76,15 @@ public class BlueAuto extends LinearOpMode {
                 .build();
 
         Action move1c = drive.actionBuilder(new Pose2d(15, 15, 0))
-                .strafeTo(new Vector2d(22, 35))
+                .strafeTo(new Vector2d(25, 35))
                 .turn(Math.toRadians(90))
                 .build();
 
-        Action move1d = drive.actionBuilder(new Pose2d(22, 35, Math.toRadians(90)))
+        Action move1d = drive.actionBuilder(new Pose2d(25, 35, Math.toRadians(90)))
                 .lineToY(50)
                 .build();
 
-        Action move1e = drive.actionBuilder(new Pose2d(22, 50, Math.toRadians(90)))
+        Action move1e = drive.actionBuilder(new Pose2d(25, 50, Math.toRadians(90)))
                 .lineToY(35)
                 .build();
 
@@ -170,7 +170,7 @@ public class BlueAuto extends LinearOpMode {
         Actions.runBlocking(move1);
 
 
-        if(leftSensor.blue() > leftSensor.green() && leftSensor.blue() > leftSensor.red()) {
+        if(leftSensor.red() > leftSensor.green() && leftSensor.red() > leftSensor.blue()) {
             delay(0.25);
             Actions.runBlocking(move1a);
             pivot.setPosition(0.525);
@@ -179,7 +179,7 @@ public class BlueAuto extends LinearOpMode {
             delay(0.25);
             pivot.setPosition(0.9);
             Actions.runBlocking(move1b);
-
+            /*
             delay(0.5);
             Actions.runBlocking(move1c);
 
@@ -191,17 +191,17 @@ public class BlueAuto extends LinearOpMode {
             Actions.runBlocking(move1d);
 
             delay(0.5);
-            grip.setPosition(0.55);
+            grip2.setPosition(0.45);
             delay(0.5);
 
             Actions.runBlocking(move1e);
-
+            */
         } else {
             Actions.runBlocking(move2);
             Actions.runBlocking(move22);
             telemetry.addData("red", leftSensor.red());
             telemetry.update();
-            if(rightSensor.blue() > rightSensor.red() && rightSensor.blue() > leftSensor.green()) {
+            if(rightSensor.red() > rightSensor.blue() && rightSensor.red() > leftSensor.green()) {
                 delay(0.25);
                 Actions.runBlocking(move23);
                 pivot.setPosition(0.525);
@@ -211,7 +211,7 @@ public class BlueAuto extends LinearOpMode {
                 pivot.setPosition(0.9);
                 Actions.runBlocking(move2a);
                 delay(0.5);
-
+                /*
                 Actions.runBlocking(move2b);
 
                 arm.setPower(1);
@@ -221,12 +221,12 @@ public class BlueAuto extends LinearOpMode {
 
                 Actions.runBlocking(move2c);
                 delay(0.5);
-                grip.setPosition(0.55);
+                grip2.setPosition(0.45);
 
                 delay(0.5);
                 Actions.runBlocking(move2d);
 
-
+                */
             } else {
 
                 Actions.runBlocking(move3);
@@ -238,7 +238,7 @@ public class BlueAuto extends LinearOpMode {
                 pivot.setPosition(0.9);
                 Actions.runBlocking(move3a);
 
-
+                /*
                 delay(0.5);
                 Actions.runBlocking(move3b);
                 delay(0.5);
@@ -249,13 +249,13 @@ public class BlueAuto extends LinearOpMode {
 
                 Actions.runBlocking(move3c);
                 delay(0.5);
-                grip.setPosition(0.55);
+                grip2.setPosition(0.45);
 
                 delay(0.25);
 
                 Actions.runBlocking(move3d);
 
-
+                */
             }
         }
 

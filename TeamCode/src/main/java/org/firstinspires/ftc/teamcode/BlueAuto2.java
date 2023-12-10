@@ -23,8 +23,8 @@ import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
 
-@Autonomous(name="Blue Auto")
-public class BlueAuto extends LinearOpMode {
+@Autonomous(name="Blue Auto Right")
+public class BlueAuto2 extends LinearOpMode {
 
     private ElapsedTime runtime = new ElapsedTime();
     private ElapsedTime period = new ElapsedTime();
@@ -61,34 +61,34 @@ public class BlueAuto extends LinearOpMode {
 
 
         Action move1 = drive.actionBuilder(startPose)
-                .strafeTo(new Vector2d(20,5))
+                .strafeTo(new Vector2d(20,-3))
                 .lineToX(30)
                 .waitSeconds(0.5)
                 .build();
 
-        Action move1a = drive.actionBuilder(new Pose2d(30, 5, 0))
-                .strafeTo(new Vector2d(23, 14))
+        Action move1a = drive.actionBuilder(new Pose2d(30, -3, 0))
+                .strafeTo(new Vector2d(23, -12))
                 .build();
 
 
-        Action move1b = drive.actionBuilder(new Pose2d(23, 14, 0))
-                .strafeTo(new Vector2d(15, 15))
+        Action move1b = drive.actionBuilder(new Pose2d(23, -12, 0))
+                .strafeTo(new Vector2d(15, -15))
                 .build();
 
-        Action move1c = drive.actionBuilder(new Pose2d(15, 15, 0))
-                .strafeTo(new Vector2d(22, 35))
-                .turn(Math.toRadians(90))
+        Action move1c = drive.actionBuilder(new Pose2d(15, -15, 0))
+                .strafeTo(new Vector2d(25, -35))
+                .turn(Math.toRadians(-90))
                 .build();
 
-        Action move1d = drive.actionBuilder(new Pose2d(22, 35, Math.toRadians(90)))
-                .lineToY(50)
+        Action move1d = drive.actionBuilder(new Pose2d(25, -35, Math.toRadians(-90)))
+                .lineToY(-50)
                 .build();
 
-        Action move1e = drive.actionBuilder(new Pose2d(22, 50, Math.toRadians(90)))
-                .lineToY(35)
+        Action move1e = drive.actionBuilder(new Pose2d(25, -50, Math.toRadians(-90)))
+                .lineToY(-35)
                 .build();
 
-        Action move2 = drive.actionBuilder(new Pose2d(30, 5, 0))
+        Action move2 = drive.actionBuilder(new Pose2d(30, -5, 0))
                 .strafeTo(new Vector2d(25, 0))
                 .build();
 
@@ -103,46 +103,46 @@ public class BlueAuto extends LinearOpMode {
                 .build();
 
         Action move2a = drive.actionBuilder(new Pose2d(29, 0, 0))
-                .strafeTo(new Vector2d(21, 2))
+                .strafeTo(new Vector2d(21, -2))
 
                 .build();
 
-        Action move2b = drive.actionBuilder(new Pose2d(21, 2, 0))
-                .strafeTo(new Vector2d(30, 35))
-                .turn(Math.toRadians(90))
+        Action move2b = drive.actionBuilder(new Pose2d(21, -2, 0))
+                .strafeTo(new Vector2d(30, -35))
+                .turn(Math.toRadians(-90))
                 .build();
 
-        Action move2c = drive.actionBuilder(new Pose2d(30, 35, Math.toRadians(90)))
-                .lineToY(50)
+        Action move2c = drive.actionBuilder(new Pose2d(30, -35, Math.toRadians(-90)))
+                .lineToY(-50)
                 .build();
 
-        Action move2d = drive.actionBuilder(new Pose2d(30, 50, Math.toRadians(90)))
-                .lineToY(35)
+        Action move2d = drive.actionBuilder(new Pose2d(30, -50, Math.toRadians(-90)))
+                .lineToY(-35)
                 .build();
 
 
         Action move3 = drive.actionBuilder(new Pose2d(29, 0, 0))
-                .turn(Math.toRadians(-90))
-                .lineToY(-16)
-                .lineToY(-5)
+                .turn(Math.toRadians(90))
+                .lineToY(16)
+                .lineToY(5)
                 .build();
 
-        Action move3a = drive.actionBuilder(new Pose2d(30, -5, Math.toRadians(-90)))
-                .lineToY(10)
+        Action move3a = drive.actionBuilder(new Pose2d(30, 5, Math.toRadians(90)))
+                .lineToY(-10)
 
                 .build();
 
-        Action move3b = drive.actionBuilder(new Pose2d(30, 10, Math.toRadians(-90)))
-                .strafeTo(new Vector2d(39, 25))
-                .turn(Math.toRadians(180))
+        Action move3b = drive.actionBuilder(new Pose2d(30, -10, Math.toRadians(90)))
+                .strafeTo(new Vector2d(39, -25))
+                .turn(Math.toRadians(-180))
                 .build();
 
-        Action move3c = drive.actionBuilder(new Pose2d(39, 25, Math.toRadians(90)))
-                .lineToY(42)
+        Action move3c = drive.actionBuilder(new Pose2d(39, -25, Math.toRadians(-90)))
+                .lineToY(-42)
                 .build();
 
-        Action move3d = drive.actionBuilder(new Pose2d(39, 42, Math.toRadians(90)))
-                .lineToY(27)
+        Action move3d = drive.actionBuilder(new Pose2d(39, -42, Math.toRadians(-90)))
+                .lineToY(-27)
                 .build();
 
 
@@ -170,16 +170,16 @@ public class BlueAuto extends LinearOpMode {
         Actions.runBlocking(move1);
 
 
-        if(leftSensor.blue() > leftSensor.green() && leftSensor.blue() > leftSensor.red()) {
+        if(rightSensor.blue() > rightSensor.green() && rightSensor.blue() > rightSensor.red()) {
             delay(0.25);
             Actions.runBlocking(move1a);
             pivot.setPosition(0.525);
             delay(0.25);
-            grip2.setPosition((0.45));
+            grip.setPosition((0.55));
             delay(0.25);
             pivot.setPosition(0.9);
             Actions.runBlocking(move1b);
-
+            /*
             delay(0.5);
             Actions.runBlocking(move1c);
 
@@ -191,27 +191,27 @@ public class BlueAuto extends LinearOpMode {
             Actions.runBlocking(move1d);
 
             delay(0.5);
-            grip.setPosition(0.55);
+            grip2.setPosition(0.45);
             delay(0.5);
 
             Actions.runBlocking(move1e);
-
+            */
         } else {
             Actions.runBlocking(move2);
             Actions.runBlocking(move22);
             telemetry.addData("red", leftSensor.red());
             telemetry.update();
-            if(rightSensor.blue() > rightSensor.red() && rightSensor.blue() > leftSensor.green()) {
+            if(leftSensor.blue() > leftSensor.red() && leftSensor.blue() > leftSensor.green()) {
                 delay(0.25);
                 Actions.runBlocking(move23);
                 pivot.setPosition(0.525);
                 delay(0.25);
-                grip2.setPosition(0.45);
+                grip.setPosition(0.55);
                 delay(0.25);
                 pivot.setPosition(0.9);
                 Actions.runBlocking(move2a);
                 delay(0.5);
-
+                /*
                 Actions.runBlocking(move2b);
 
                 arm.setPower(1);
@@ -221,11 +221,11 @@ public class BlueAuto extends LinearOpMode {
 
                 Actions.runBlocking(move2c);
                 delay(0.5);
-                grip.setPosition(0.55);
+                grip2.setPosition(0.45);
 
                 delay(0.5);
                 Actions.runBlocking(move2d);
-
+                */
 
             } else {
 
@@ -233,12 +233,12 @@ public class BlueAuto extends LinearOpMode {
                 delay(0.25);
                 pivot.setPosition(0.525);
                 delay(0.25);
-                grip2.setPosition(0.45);
+                grip.setPosition(0.55);
                 delay(0.25);
                 pivot.setPosition(0.9);
                 Actions.runBlocking(move3a);
 
-
+                /*
                 delay(0.5);
                 Actions.runBlocking(move3b);
                 delay(0.5);
@@ -249,12 +249,12 @@ public class BlueAuto extends LinearOpMode {
 
                 Actions.runBlocking(move3c);
                 delay(0.5);
-                grip.setPosition(0.55);
+                grip2.setPosition(0.45);
 
                 delay(0.25);
 
                 Actions.runBlocking(move3d);
-
+                */
 
             }
         }

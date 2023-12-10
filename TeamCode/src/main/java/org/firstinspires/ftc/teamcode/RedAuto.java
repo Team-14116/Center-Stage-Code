@@ -61,84 +61,88 @@ public class RedAuto extends LinearOpMode {
 
 
         Action move1 = drive.actionBuilder(startPose)
-                .strafeTo(new Vector2d(20,-5))
+                .strafeTo(new Vector2d(20,-3))
                 .lineToX(30)
                 .waitSeconds(0.5)
                 .build();
 
-        Action move1a = drive.actionBuilder(new Pose2d(30, -5, 0))
-                .strafeTo(new Vector2d(23, -14))
+        Action move1a = drive.actionBuilder(new Pose2d(30, -3, 0))
+                .strafeTo(new Vector2d(23, -12))
                 .build();
 
 
-        Action move1b = drive.actionBuilder(new Pose2d(23, -14, 0))
+        Action move1b = drive.actionBuilder(new Pose2d(23, -12, 0))
                 .strafeTo(new Vector2d(15, -15))
                 .build();
 
         Action move1c = drive.actionBuilder(new Pose2d(15, -15, 0))
-                .strafeTo(new Vector2d(20, -40))
+                .strafeTo(new Vector2d(23, -35))
                 .turn(Math.toRadians(-90))
                 .build();
 
-        Action move1d = drive.actionBuilder(new Pose2d(20, -40, Math.toRadians(-90)))
+        Action move1d = drive.actionBuilder(new Pose2d(23, -35, Math.toRadians(-90)))
                 .lineToY(-50)
                 .build();
 
-        Action move1e = drive.actionBuilder(new Pose2d(20, -50, Math.toRadians(-90)))
-                .strafeTo(new Vector2d(5, -49))
+        Action move1e = drive.actionBuilder(new Pose2d(23, -50, Math.toRadians(-90)))
+                .lineToY(-35)
                 .build();
 
         Action move2 = drive.actionBuilder(new Pose2d(30, -5, 0))
-                .strafeTo(new Vector2d(25, -1))
+                .strafeTo(new Vector2d(25, 0))
                 .build();
 
-        Action move22 = drive.actionBuilder(new Pose2d(25, -1, 0))
+        Action move22 = drive.actionBuilder(new Pose2d(25, 0, 0))
                 .lineToX(34)
 
                 .build();
 
-        Action move23 = drive.actionBuilder(new Pose2d(34, -1, 0))
-                .lineToX(30)
+        Action move23 = drive.actionBuilder(new Pose2d(34, 0, 0))
+                .lineToX(29)
 
                 .build();
 
-        Action move2a = drive.actionBuilder(new Pose2d(30, -1, 0))
+        Action move2a = drive.actionBuilder(new Pose2d(29, 0, 0))
                 .strafeTo(new Vector2d(21, -2))
 
                 .build();
 
         Action move2b = drive.actionBuilder(new Pose2d(21, -2, 0))
-                .strafeTo(new Vector2d(25, -40))
+                .strafeTo(new Vector2d(32, -35))
                 .turn(Math.toRadians(-90))
                 .build();
 
-        Action move2c = drive.actionBuilder(new Pose2d(25, -40, Math.toRadians(-90)))
+        Action move2c = drive.actionBuilder(new Pose2d(32, -35, Math.toRadians(-90)))
                 .lineToY(-50)
                 .build();
 
-        Action move2d = drive.actionBuilder(new Pose2d(25, -50, Math.toRadians(-90)))
-                .strafeTo(new Vector2d(5, -49))
+        Action move2d = drive.actionBuilder(new Pose2d(32, -50, Math.toRadians(-90)))
+                .lineToY(-35)
                 .build();
 
 
-        Action move3 = drive.actionBuilder(new Pose2d(30, -1, 0))
+        Action move3 = drive.actionBuilder(new Pose2d(29, 0, 0))
                 .turn(Math.toRadians(90))
-                .lineToY(13)
-                .lineToY(7)
+                .lineToY(16)
+                .lineToY(5)
                 .build();
 
-        Action move3a = drive.actionBuilder(new Pose2d(30, 7, Math.toRadians(90)))
+        Action move3a = drive.actionBuilder(new Pose2d(30, 5, Math.toRadians(90)))
                 .lineToY(-10)
 
                 .build();
 
         Action move3b = drive.actionBuilder(new Pose2d(30, -10, Math.toRadians(90)))
-                .strafeTo(new Vector2d(35, -30))
+                .strafeTo(new Vector2d(39, -25))
                 .turn(Math.toRadians(-180))
                 .build();
 
-        Action move3c = drive.actionBuilder(new Pose2d(35, -30, Math.toRadians(-90)))
-                .lineToY(-46)
+        Action move3c = drive.actionBuilder(new Pose2d(39, -25, Math.toRadians(-90)))
+                .lineToY(-42)
+                .build();
+
+        Action move3d = drive.actionBuilder(new Pose2d(39, -42, Math.toRadians(-90)))
+                .lineToY(-27)
                 .build();
 
 
@@ -172,6 +176,8 @@ public class RedAuto extends LinearOpMode {
             pivot.setPosition(0.525);
             delay(0.25);
             grip.setPosition((0.55));
+            delay(0.25);
+            pivot.setPosition(0.9);
             Actions.runBlocking(move1b);
 
             delay(0.5);
@@ -180,7 +186,7 @@ public class RedAuto extends LinearOpMode {
             arm.setPower(1);
             delay(0.25);
             arm.setPower(0.1);
-            pivot.setPosition(0.9);
+
 
             Actions.runBlocking(move1d);
 
@@ -188,7 +194,7 @@ public class RedAuto extends LinearOpMode {
             grip2.setPosition(0.45);
             delay(0.5);
 
-           // Actions.runBlocking(move1e);
+            Actions.runBlocking(move1e);
 
         } else {
             Actions.runBlocking(move2);
@@ -201,6 +207,8 @@ public class RedAuto extends LinearOpMode {
                 pivot.setPosition(0.525);
                 delay(0.25);
                 grip.setPosition(0.55);
+                delay(0.25);
+                pivot.setPosition(0.9);
                 Actions.runBlocking(move2a);
                 delay(0.5);
 
@@ -209,14 +217,14 @@ public class RedAuto extends LinearOpMode {
                 arm.setPower(1);
                 delay(0.25);
                 arm.setPower(0.1);
-                pivot.setPosition(0.9);
+
 
                 Actions.runBlocking(move2c);
                 delay(0.5);
-                grip2.setPosition(0.55);
+                grip2.setPosition(0.45);
 
                 delay(0.5);
-                //Actions.runBlocking(move2d);
+                Actions.runBlocking(move2d);
 
 
             } else {
@@ -225,26 +233,27 @@ public class RedAuto extends LinearOpMode {
                 delay(0.25);
                 pivot.setPosition(0.525);
                 delay(0.25);
-                grip.setPosition(0.45);
+                grip.setPosition(0.55);
                 delay(0.25);
+                pivot.setPosition(0.9);
                 Actions.runBlocking(move3a);
 
 
                 delay(0.5);
                 Actions.runBlocking(move3b);
-
+                delay(0.5);
                 arm.setPower(1);
                 delay(0.25);
                 arm.setPower(0.1);
-                pivot.setPosition(0.9);
+
 
                 Actions.runBlocking(move3c);
                 delay(0.5);
-                grip2.setPosition(0.55);
+                grip2.setPosition(0.45);
 
                 delay(0.25);
 
-
+                Actions.runBlocking(move3d);
 
 
             }
