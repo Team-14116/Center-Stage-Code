@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import android.view.View;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.BuiltinCameraDirection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
@@ -15,6 +16,8 @@ import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
 import java.util.List;
 
 public class AprilTagTest extends LinearOpMode {
+
+    private static final boolean USE_WEBCAM = true;  // true for webcam, false for phone camera
 
     DcMotor backLeftDrive;
     DcMotor backRightDrive;
@@ -26,6 +29,24 @@ public class AprilTagTest extends LinearOpMode {
     VisionPortal myVisionPortal;
 
 
+    /**
+     * Initialize the AprilTag processor.
+     */
+    private void initAprilTag() {
+
+        // Create the AprilTag processor the easy way.
+        myAprilTagProcessor = AprilTagProcessor.easyCreateWithDefaults();
+
+        // Create the vision portal the easy way.
+        if (USE_WEBCAM) {
+            myVisionPortal = VisionPortal.easyCreateWithDefaults(
+                    hardwareMap.get(WebcamName.class, "Webcam 1"), myAprilTagProcessor);
+        } else {
+            myVisionPortal = VisionPortal.easyCreateWithDefaults(
+                    BuiltinCameraDirection.BACK, myAprilTagProcessor);
+        }
+
+    }   // end method initAprilTag()
     @Override
     public void runOpMode() {
       backLeftDrive = hardwareMap.dcMotor.get("leftRear");
