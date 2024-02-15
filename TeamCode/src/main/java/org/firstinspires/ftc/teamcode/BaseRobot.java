@@ -134,7 +134,7 @@ public class BaseRobot {
         gripRight.setPosition(1);
     }
     public void gripRightOpen(){
-        gripRight.setPosition(0.3);
+        gripRight.setPosition(0);
     }
 
 
