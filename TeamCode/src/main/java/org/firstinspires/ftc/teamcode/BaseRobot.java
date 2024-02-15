@@ -124,6 +124,18 @@ public class BaseRobot {
         pivotRight.setPosition(1);
     }
 
+    public void gripLeftClose(){
+        gripLeft.setPosition(0);
+    }
+    public void gripLeftOpen(){
+        gripLeft.setPosition(1);
+    }
+    public void gripRightClose(){
+        gripRight.setPosition(1);
+    }
+    public void gripRightOpen(){
+        gripRight.setPosition(0.3);
+    }
 
 
 }

@@ -113,11 +113,11 @@ public class MonkeyTeleOp2 extends OpMode{
 
         // claw mechanism
         if(gamepad1.left_bumper){
-            robot.gripRight.setPosition(0.3);
-            robot.gripLeft.setPosition(1);
+            robot.gripLeftOpen();
+            robot.gripRightOpen();
         } else if(gamepad1.right_bumper) {
-            robot.gripRight.setPosition(1);
-            robot.gripLeft.setPosition(0);
+            robot.gripLeftClose();
+            robot.gripRightClose();
         }
 
         if(gamepad1.b) {
