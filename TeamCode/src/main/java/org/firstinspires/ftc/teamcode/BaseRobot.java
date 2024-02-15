@@ -13,9 +13,11 @@ public class BaseRobot {
     public DcMotor rightRear = null;
     public DcMotor pullUp = null;
     public DcMotor arm = null;
-    public Servo   grip = null;
-    public Servo   grip2 = null;
-    public Servo   pivot = null;
+    public Servo gripRight = null;
+    public Servo gripLeft = null;
+    public Servo   pivotRight = null;
+    public Servo   pivotLeft = null;
+
     public Servo   launch = null;
 
 
@@ -49,9 +51,11 @@ public class BaseRobot {
         pullUp    = hwMap.dcMotor.get("pullUp");
         arm    = hwMap.dcMotor.get("arm");
 
-        grip    = hwMap.servo.get("grip");
-        grip2   = hwMap.servo.get("grip2");
-        pivot    = hwMap.servo.get("pivot");
+        gripRight = hwMap.servo.get("gripRight");
+        gripLeft = hwMap.servo.get("gripLeft");
+        pivotLeft    = hwMap.servo.get("pivotLeft");
+        pivotRight    = hwMap.servo.get("pivotRight");
+
         launch    = hwMap.servo.get("launch");
 
 
@@ -108,6 +112,16 @@ public class BaseRobot {
 
         // Reset the cycle clock for the next pass.
         period.reset();
+    }
+
+    public void pivotDown(){
+        pivotLeft.setPosition(.6);
+        pivotRight.setPosition(.4);
+    }
+
+    public void pivotUp(){
+        pivotLeft.setPosition(0);
+        pivotRight.setPosition(1);
     }
 
 

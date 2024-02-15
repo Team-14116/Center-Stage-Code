@@ -3,12 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
-@TeleOp(name="Monkey Mania", group="Learning")
-public class MonkeyTeleOp extends OpMode{
+@TeleOp(name="Monkey Mania2", group="Learning")
+public class MonkeyTeleOp2 extends OpMode{
 
     /* Declare OpMode members. */
     BaseRobot robot   = new BaseRobot(); // use the class created to define a Robot's hardware
@@ -33,11 +30,13 @@ public class MonkeyTeleOp extends OpMode{
         robot.leftRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.rightRear.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         robot.pullUp.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-      //  robot.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        //  robot.arm.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        robot.grip.setPosition(0.55);
-        robot.grip2.setPosition(0.45);
-        robot.pivot.setPosition(0.525);
+        robot.gripRight.setPosition(0.55);
+        robot.gripLeft.setPosition(0.45);
+        robot.pivotLeft.setPosition(0.525);
+        robot.pivotRight.setPosition(-0.525);
+
         robot.launch.setPosition(0);
 
 
@@ -101,30 +100,30 @@ public class MonkeyTeleOp extends OpMode{
         // main arm
         if(gamepad1.y) {
             robot.arm.setPower(1);
-            robot.pivot.setPosition(0.9);
+            robot.pivotUp();
         } else if (gamepad1.a && armPos > 500) {
             robot.arm.setPower(-1);
-            robot.pivot.setPosition(0.525);
+            robot.pivotDown();
         } else if(gamepad1.a && armPos < 500) {
             robot.arm.setPower(-0.3);
-            robot.pivot.setPosition(0.525);
+            robot.pivotDown();
         } else {
             robot.arm.setPower(0.01);
         }
 
         // claw mechanism
         if(gamepad1.left_bumper){
-            robot.grip.setPosition(0.55);
-            robot.grip2.setPosition(0.45);
+            robot.gripRight.setPosition(0.3);
+            robot.gripLeft.setPosition(1);
         } else if(gamepad1.right_bumper) {
-            robot.grip.setPosition(1);
-            robot.grip2.setPosition(1);
+            robot.gripRight.setPosition(1);
+            robot.gripLeft.setPosition(0);
         }
 
         if(gamepad1.b) {
-            robot.pivot.setPosition(0.525);
+            robot.pivotDown();
         } else if(gamepad1.x) {
-            robot.pivot.setPosition(0.9);
+            robot.pivotUp();
         }
 
         if(gamepad1.dpad_up) {
@@ -148,4 +147,5 @@ public class MonkeyTeleOp extends OpMode{
     @Override
     public void stop() {
     }
+
 }
