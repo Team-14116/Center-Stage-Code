@@ -115,8 +115,8 @@ public class BaseRobot {
     }
 
     public void pivotDown(){
-        pivotLeft.setPosition(.6);
-        pivotRight.setPosition(.4);
+        pivotLeft.setPosition(.59);
+        pivotRight.setPosition(.41);
     }
 
     public void pivotUp(){

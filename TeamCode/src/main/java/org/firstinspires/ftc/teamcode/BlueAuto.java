@@ -33,9 +33,10 @@ public class BlueAuto extends LinearOpMode {
     public ColorSensor rightSensor = null;
 
     public DcMotor arm = null;
-    public Servo   grip = null;
-    public Servo   grip2 = null;
-    public Servo   pivot = null;
+    public Servo gripRight = null;
+    public Servo gripLeft = null;
+    public Servo   pivotRight = null;
+    public Servo   pivotLeft = null;
     MecanumDrive drive = null;
 
     @Override
@@ -48,16 +49,18 @@ public class BlueAuto extends LinearOpMode {
         arm    = hardwareMap.dcMotor.get("arm");
         arm.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
 
-        grip    = hardwareMap.servo.get("grip");
-        grip2    = hardwareMap.servo.get("grip2");
-        pivot    = hardwareMap.servo.get("pivot");
+        gripRight = hardwareMap.servo.get("gripRight");
+        gripLeft = hardwareMap.servo.get("gripLeft");
+        pivotLeft    = hardwareMap.servo.get("pivotLeft");
+        pivotRight    = hardwareMap.servo.get("pivotRight");
 
         leftSensor = hardwareMap.colorSensor.get("leftColor");
         rightSensor = hardwareMap.colorSensor.get("rightColor");
 
-        grip.setPosition(0);
-        grip2.setPosition(0);
-        pivot.setPosition(0.525);
+        pivotLeft.setPosition(0.3); //up
+        pivotRight.setPosition(0.7); // up
+        gripLeft.setPosition(0); // close
+        gripRight.setPosition(1); //close
 
 
         Action move1 = drive.actionBuilder(startPose)
@@ -163,21 +166,24 @@ public class BlueAuto extends LinearOpMode {
 
         waitForStart();
         delay(0.1);
-        grip.setPosition(1);
-        grip2.setPosition(1);
+
         delay(1);
-        pivot.setPosition(0.9);
+
         Actions.runBlocking(move1);
 
 
         if(leftSensor.blue() > leftSensor.green() && leftSensor.blue() > leftSensor.red()) {
             delay(0.25);
             Actions.runBlocking(move1a);
-            pivot.setPosition(0.525);
+
+            pivotLeft.setPosition(.6); // down
+            pivotRight.setPosition(.4); // down
+
             delay(0.25);
-            grip2.setPosition((0.45));
+            gripLeft.setPosition(1);// open right grip
             delay(0.25);
-            pivot.setPosition(0.9);
+            pivotLeft.setPosition(0.3); //up
+            pivotRight.setPosition(0.7); // up
             Actions.runBlocking(move1b);
 
             delay(0.5);
@@ -191,7 +197,7 @@ public class BlueAuto extends LinearOpMode {
             Actions.runBlocking(move1d);
 
             delay(0.5);
-            grip.setPosition(0.55);
+            gripRight.setPosition(0); // open left grip
             delay(0.5);
 
             Actions.runBlocking(move1e);
@@ -204,11 +210,13 @@ public class BlueAuto extends LinearOpMode {
             if(rightSensor.blue() > rightSensor.red() && rightSensor.blue() > leftSensor.green()) {
                 delay(0.25);
                 Actions.runBlocking(move23);
-                pivot.setPosition(0.525);
+                pivotLeft.setPosition(.6); // down
+                pivotRight.setPosition(.4); // down
                 delay(0.25);
-                grip2.setPosition(0.45);
+                gripLeft.setPosition(1);// open right grip
                 delay(0.25);
-                pivot.setPosition(0.9);
+                pivotLeft.setPosition(0.3); //up
+                pivotRight.setPosition(0.7); // up
                 Actions.runBlocking(move2a);
                 delay(0.5);
 
@@ -221,7 +229,7 @@ public class BlueAuto extends LinearOpMode {
 
                 Actions.runBlocking(move2c);
                 delay(0.5);
-                grip.setPosition(0.55);
+                gripRight.setPosition(0); // open left grip
 
                 delay(0.5);
                 Actions.runBlocking(move2d);
@@ -231,11 +239,13 @@ public class BlueAuto extends LinearOpMode {
 
                 Actions.runBlocking(move3);
                 delay(0.25);
-                pivot.setPosition(0.525);
+                pivotLeft.setPosition(.6); // down
+                pivotRight.setPosition(.4); // down
                 delay(0.25);
-                grip2.setPosition(0.45);
+                gripLeft.setPosition(1);// open right grip
                 delay(0.25);
-                pivot.setPosition(0.9);
+                pivotLeft.setPosition(0.3); //up
+                pivotRight.setPosition(0.7); // up
                 Actions.runBlocking(move3a);
 
 
@@ -249,7 +259,7 @@ public class BlueAuto extends LinearOpMode {
 
                 Actions.runBlocking(move3c);
                 delay(0.5);
-                grip.setPosition(0.55);
+                gripRight.setPosition(0); // open left grip
 
                 delay(0.25);
 
