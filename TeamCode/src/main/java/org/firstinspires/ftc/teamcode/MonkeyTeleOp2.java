@@ -65,9 +65,9 @@ public class MonkeyTeleOp2 extends OpMode{
     public void loop() {
         int armPos = robot.arm.getCurrentPosition();
 
-        double y = -gamepad1.left_stick_y * 0.6; // Remember, this is reversed!
+        double y = -gamepad1.left_stick_y * 0.9; // Remember, this is reversed!
         double x = gamepad1.left_stick_x * 0;
-        double rx = gamepad1.right_stick_x * 0.6;
+        double rx = gamepad1.right_stick_x * 0.4;
 
         // Denominator is the largest motor power (absolute value) or 1
         // This ensures all the powers maintain the same ratio, but only when
